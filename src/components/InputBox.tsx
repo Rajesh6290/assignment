@@ -120,8 +120,10 @@ const InputBox = () => {
     const backSpace = (e: KeyboardEvent) => {
       if (e.key === "Backspace") {
         if (selectedChip.length > 0) {
-          setSelectedChip([]);
-          setLastIndex([]);
+          const updatedSelectedChip = [...selectedChip];
+          updatedSelectedChip.pop();
+          setSelectedChip(updatedSelectedChip);
+          setLastIndex(updatedSelectedChip.length > 0 ? [] : [...lastIndex]);
         } else {
           setSelectedChip([...lastIndex]);
         }
