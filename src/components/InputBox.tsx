@@ -139,14 +139,11 @@ const InputBox = () => {
   }, [selectedChip.length, showUsers]);
   return (
     <div className="w-full items-center  flex justify-center ">
-      <div className="flex flex-col gap-2 w-fit bg-gray-50 rounded-xl p-4 items-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]">
+      <div className="flex flex-col gap-2 w-fit bg-gray-50 rounded-xl  p-10 items-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]">
         <h1 className=" text-xl font-bold text-gray-800">
           Custom MultiSelect Input Box
         </h1>
-        <h1 className=" text-sm  text-gray-800">
-          Note:- Search Array in this code check then search else the search
-          latter be the A to J.
-        </h1>
+
         <div className="flex justify-center items-center w-fit max-w-[30rem] h-fit gap-2 flex-wrap border-2 border-red-500 rounded-lg p-2">
           {/* Selected users showing  */}
           {selectedChip?.map((item) => (
@@ -194,9 +191,12 @@ const InputBox = () => {
         {showUsers && (
           <div
             ref={modalRef}
-            className={`w-[17rem] duration-300 ease-out transition-all rounded-lg bg-gray-100 p-2 flex flex-col gap-1 items-center`}
+            className={`w-[17rem] max-h-[20rem] min-h-fit overflow-y-auto  duration-300 ease-out transition-all rounded-lg bg-gray-100 p-2 flex flex-col gap-1 items-center`}
           >
-            {filteredItems?.length > 0 ? (
+            {filteredItems?.filter(
+              (curId) =>
+                !selectedChip.find((selectedChipId) => selectedChipId === curId)
+            ).length > 0 ? (
               filteredItems
                 ?.filter(
                   (curId) =>
