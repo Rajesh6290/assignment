@@ -81,7 +81,7 @@ const InputBox = () => {
     const filteredData = users.filter(
       (curUser) =>
         curUser.name.toLowerCase().includes(item.toLowerCase()) &&
-        selectedChip.filter((selectedUser) => selectedUser.id !== curUser.id)
+        !selectedChip.find((selectedUser) => selectedUser.id === curUser.id)
     );
 
     if (filteredData.length > 0) setFilteredItems([...filteredData]);
@@ -122,33 +122,19 @@ const InputBox = () => {
         if (selectedChip.length > 0) {
           setSelectedChip([]);
           setLastIndex([]);
+          setShowUsers(false);
         } else {
           setSelectedChip([...lastIndex]);
+          setShowUsers(false);
         }
       }
     };
     // call to event handler
     window.addEventListener("keydown", backSpace);
 
-    // const handleClickOutside = (event: MouseEvent) => {
-    //   if (
-    //     modalRef.current &&
-    //     !modalRef.current.contains(event.target as Node)
-    //   ) {
-    //     // Click occurred outside the modal, close it
-    //     setShowUsers(false);
-    //     console.log("outside click event: ");
-    //   }
-    // };
-
-    // // Add click event listener when the modal is open
-    // if (showUsers) {
-    //   document.addEventListener("click", handleClickOutside);
-    // }
     return () => {
       // remove event listener
       window.removeEventListener("keydown", backSpace);
-      // document.removeEventListener("click", handleClickOutside);
     };
   }, [selectedChip.length, showUsers]);
   return (
@@ -195,7 +181,7 @@ const InputBox = () => {
             value={inputValue}
             placeholder="type and search user"
             onChange={(e) => handelChange(e?.target?.value)}
-            onFocus={() => setShowUsers(!showUsers)}
+            onFocus={() => setShowUsers(true)}
           />
         </div>
 
