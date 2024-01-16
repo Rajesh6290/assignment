@@ -122,10 +122,8 @@ const InputBox = () => {
         if (selectedChip.length > 0) {
           setSelectedChip([]);
           setLastIndex([]);
-          setShowUsers(false);
         } else {
           setSelectedChip([...lastIndex]);
-          setShowUsers(false);
         }
       }
     };
